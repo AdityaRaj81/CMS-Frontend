@@ -27,6 +27,9 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { user, logout } = useAuthStore()
 
+  // Sidebar width is w-64 (256px), sm:w-72 (288px), md:w-80 (320px)
+  // Main content margin matches sidebar width on desktop: md:ml-80 (320px)
+
   const iconMap: Record<string, React.ReactNode> = {
     LayoutDashboard: <LayoutDashboard className="h-5 w-5" />,
     FileText: <FileText className="h-5 w-5" />,

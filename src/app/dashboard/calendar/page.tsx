@@ -103,10 +103,10 @@ export default function CalendarPage() {
 
             {/* Weekdays */}
             <div className="grid grid-cols-7 gap-1 sm:gap-2 mb-2 sm:mb-4">
-              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
+              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day, idx) => (
                 <div key={day} className="text-center font-semibold text-gray-600 text-xs sm:text-sm py-1 sm:py-2">
                   <span className="hidden sm:inline">{day}</span>
-                  <span className="sm:hidden">{day.substring(0, 1)}</span>
+                  <span className="sm:hidden">{['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'][idx]}</span>
                 </div>
               ))}
             </div>
