@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --navy: #0b1f3a;
+    --gold: #c8a951;
+    --charcoal: #2b2e34;
+    --ivory: #f7f5ef;
+    --red: #8b1e1e;
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+  }
+
+  body {
+    @apply bg-legal-ivory text-legal-charcoal font-sans;
+  }
+
+  h1 {
+    @apply font-serif text-3xl font-bold text-legal-navy;
+  }
+
+  h2 {
+    @apply font-serif text-2xl font-semibold text-legal-navy;
+  }
+
+  h3 {
+    @apply font-serif text-xl font-semibold text-legal-navy;
+  }
+
+  h4,
+  h5,
+  h6 {
+    @apply font-serif font-semibold text-legal-navy;
+  }
+
+  button {
+    @apply font-sans;
+  }
+
+  code,
+  pre {
+    @apply font-mono;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply rounded-lg bg-legal-navy px-6 py-2.5 font-medium text-white transition-all duration-200 hover:bg-opacity-90;
+  }
+
+  .btn-secondary {
+    @apply rounded-lg border border-legal-navy bg-white px-6 py-2.5 font-medium text-legal-navy transition-all duration-200 hover:bg-legal-ivory;
+  }
+
+  .btn-accent {
+    @apply rounded-lg bg-legal-gold px-6 py-2.5 font-medium text-legal-navy transition-all duration-200 hover:bg-opacity-90;
+  }
+
+  .card {
+    @apply rounded-xl border border-gray-200 bg-white p-6 shadow-sm;
+  }
+
+  .card-hover {
+    @apply card transition-all duration-200 hover:shadow-md hover:border-legal-gold;
+  }
+
+  .input-field {
+    @apply w-full rounded-lg border border-gray-300 bg-white px-4 py-2.5 font-sans text-legal-charcoal focus:border-legal-gold focus:outline-none focus:ring-2 focus:ring-legal-gold/20;
+  }
+
+  .badge {
+    @apply inline-flex items-center rounded-full px-3 py-1 text-sm font-medium;
+  }
+
+  .badge-primary {
+    @apply badge bg-legal-navy/10 text-legal-navy;
+  }
+
+  .badge-success {
+    @apply badge bg-green-100 text-green-700;
+  }
+
+  .badge-warning {
+    @apply badge bg-yellow-100 text-yellow-700;
+  }
+
+  .badge-danger {
+    @apply badge bg-legal-red/10 text-legal-red;
+  }
+
+  .section-title {
+    @apply font-serif text-xl font-semibold text-legal-navy;
+  }
+
+  .case-number {
+    @apply font-mono text-sm font-medium text-legal-charcoal;
+  }
+
+  .sidebar-link {
+    @apply flex items-center rounded-lg px-4 py-3 transition-all duration-200 hover:bg-legal-navy/5;
+  }
+
+  .sidebar-link.active {
+    @apply border-r-4 border-legal-gold bg-legal-navy/10 text-legal-navy;
+  }
+}
