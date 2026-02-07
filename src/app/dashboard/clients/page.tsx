@@ -78,22 +78,23 @@ export default function ClientsPage() {
   }, [searchTerm, filterType])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Clients</h1>
-          <p className="text-gray-600">Manage clients and assign cases</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">Clients</h1>
+          <p className="text-sm sm:text-base text-gray-600">Manage clients and assign cases</p>
         </div>
-        <Button variant="primary" size="md" className="gap-2">
+        <Button variant="primary" size="md" className="gap-2 w-full sm:w-auto touch-manipulation">
           <Plus className="h-5 w-5" />
-          Add Client
+          <span className="hidden sm:inline">Add Client</span>
+          <span className="sm:hidden">Add</span>
         </Button>
       </div>
 
       {/* Filters */}
       <Card className="border-2 border-legal-gold/20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <Input
             placeholder="Search by name, email, or phone..."
             icon={<Search className="h-5 w-5" />}
@@ -113,7 +114,7 @@ export default function ClientsPage() {
       </Card>
 
       {/* Clients Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
         {filteredClients.map((client) => (
           <Card key={client.id} className="flex flex-col">
             <div className="mb-4 flex items-start justify-between">
@@ -149,11 +150,11 @@ export default function ClientsPage() {
                 {client.caseCount} case{client.caseCount !== 1 ? 's' : ''} assigned
               </p>
               <div className="flex gap-2">
-                <Button variant="secondary" size="sm" className="flex-1 gap-1">
+                <Button variant="secondary" size="sm" className="flex-1 gap-1 touch-manipulation">
                   <Edit className="h-4 w-4" />
                   Edit
                 </Button>
-                <Button variant="ghost" size="sm" className="text-legal-red hover:bg-red-50">
+                <Button variant="ghost" size="sm" className="text-legal-red hover:bg-red-50 touch-manipulation">
                   <Trash2 className="h-4 w-4" />
                 </Button>
               </div>

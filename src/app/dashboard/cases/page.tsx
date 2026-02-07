@@ -101,22 +101,23 @@ export default function CasesPage() {
   }, [searchTerm, filterCourt, filterCategory])
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Cases</h1>
-          <p className="text-gray-600">Manage and track all your legal cases</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">Cases</h1>
+          <p className="text-sm sm:text-base text-gray-600">Manage and track all your legal cases</p>
         </div>
-        <Button variant="primary" size="md" className="gap-2">
+        <Button variant="primary" size="md" className="gap-2 w-full sm:w-auto touch-manipulation">
           <Plus className="h-5 w-5" />
-          New Case
+          <span className="hidden sm:inline">New Case</span>
+          <span className="sm:hidden">New</span>
         </Button>
       </div>
 
       {/* Filters */}
       <Card className="border-2 border-legal-gold/20">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           <Input
             placeholder="Search case number, party name, CNR..."
             icon={<Search className="h-5 w-5" />}
@@ -156,7 +157,52 @@ export default function CasesPage() {
 
       {/* Cases Table */}
       <Card className="overflow-hidden">
-        <div className="overflow-x-auto">
+        {/* Mobile Card View */}
+        <div className="md:hidden space-y-4">
+          {filteredCases.map((caseItem) => {
+            const statusConfig = CASE_STATUSES.find((s) => s.value === caseItem.status)
+            return (
+              <div
+                key={caseItem.id}
+                className="border-b border-gray-200 last:border-b-0 p-4 hover:bg-gray-50 transition-colors"
+              >
+                <div className="flex items-start justify-between mb-2">
+                  <div className="flex-1">
+                    <span className="font-mono text-sm font-semibold text-legal-navy block mb-1">
+                      {caseItem.caseNumber}
+                    </span>
+                    <p className="text-sm font-medium text-gray-900 mb-1">{caseItem.title}</p>
+                    <p className="text-xs text-gray-500">
+                      {caseItem.petitioner} vs {caseItem.respondent.split(' ').pop()}
+                    </p>
+                  </div>
+                  <Badge variant={statusConfig?.value === 'active' ? 'success' : statusConfig?.value === 'pending' ? 'warning' : 'info'}>
+                    {statusConfig?.label}
+                  </Badge>
+                </div>
+                <div className="text-xs text-gray-600 space-y-1 mb-3">
+                  <div>{caseItem.court}</div>
+                  <div>Next: {format(caseItem.nextHearing, 'dd MMM yyyy')}</div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <button className="flex-1 py-2 px-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 text-sm font-medium transition-colors touch-manipulation flex items-center justify-center gap-2">
+                    <Eye className="h-4 w-4" />
+                    View
+                  </button>
+                  <button className="py-2 px-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors touch-manipulation">
+                    <Edit className="h-4 w-4" />
+                  </button>
+                  <button className="py-2 px-3 bg-red-50 hover:bg-red-100 rounded-lg text-legal-red transition-colors touch-manipulation">
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            )
+          })}
+        </div>
+
+        {/* Desktop Table View */}
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full">
             <thead>
               <tr className="border-b border-gray-200 bg-gray-50">
@@ -212,13 +258,13 @@ export default function CasesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
+                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation">
                           <Eye className="h-4 w-4" />
                         </button>
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
+                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation">
                           <Edit className="h-4 w-4" />
                         </button>
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors">
+                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors touch-manipulation">
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>
@@ -232,16 +278,16 @@ export default function CasesPage() {
       </Card>
 
       {/* Pagination */}
-      <div className="flex items-center justify-between">
-        <p className="text-sm text-gray-600">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p className="text-xs sm:text-sm text-gray-600 text-center sm:text-left">
           Showing <span className="font-semibold">{filteredCases.length}</span> of{' '}
           <span className="font-semibold">{mockCases.length}</span> cases
         </p>
-        <div className="flex gap-2">
-          <Button variant="secondary" size="sm">
+        <div className="flex gap-2 justify-center">
+          <Button variant="secondary" size="sm" className="touch-manipulation">
             Previous
           </Button>
-          <Button variant="secondary" size="sm">
+          <Button variant="secondary" size="sm" className="touch-manipulation">
             Next
           </Button>
         </div>

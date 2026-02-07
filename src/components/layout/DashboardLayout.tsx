@@ -23,7 +23,7 @@ import { cn } from '@/lib/utils'
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false) // Default closed on mobile
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { user, logout } = useAuthStore()
 
@@ -38,11 +38,20 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
 
   return (
     <div className="flex h-screen bg-legal-ivory">
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/50 md:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed inset-y-0 left-0 z-40 w-80 border-r border-gray-200 bg-white transition-transform duration-300 ease-in-out',
-          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          'fixed inset-y-0 left-0 z-40 w-64 sm:w-72 md:w-80 border-r border-gray-200 bg-white transition-transform duration-300 ease-in-out',
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full',
+          'md:translate-x-0' // Always visible on desktop
         )}
       >
         {/* Sidebar Header */}
@@ -97,26 +106,27 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
       </aside>
 
       {/* Main Content */}
-      <div className={cn('flex flex-1 flex-col', sidebarOpen ? 'ml-80' : '')}>
+      <div className={cn('flex flex-1 flex-col', 'md:ml-80')}>
         {/* Header */}
-        <header className="sticky top-0 z-30 border-b border-gray-200 bg-white px-6 py-4 shadow-sm">
+        <header className="sticky top-0 z-30 border-b border-gray-200 bg-white px-4 sm:px-6 py-3 sm:py-4 shadow-sm">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="rounded-lg p-2 hover:bg-gray-100"
+                className="rounded-lg p-2 hover:bg-gray-100 touch-manipulation"
+                aria-label="Toggle sidebar"
               >
-                <Menu className="h-6 w-6 text-gray-600" />
+                <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
               </button>
-              <h2 className="font-serif text-lg font-semibold text-legal-navy">
+              <h2 className="font-serif text-base sm:text-lg font-semibold text-legal-navy truncate max-w-[150px] sm:max-w-none">
                 {SIDEBAR_MENU.find((m) => m.href === pathname)?.label || 'Dashboard'}
               </h2>
             </div>
 
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               {/* Notifications */}
-              <button className="relative rounded-lg p-2 hover:bg-gray-100">
-                <Bell className="h-6 w-6 text-gray-600" />
+              <button className="relative rounded-lg p-2 hover:bg-gray-100 touch-manipulation" aria-label="Notifications">
+                <Bell className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
                 <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-legal-red"></span>
               </button>
 
@@ -124,21 +134,22 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
               <div className="relative">
                 <button
                   onClick={() => setDropdownOpen(!dropdownOpen)}
-                  className="flex items-center gap-2 rounded-lg px-3 py-2 hover:bg-gray-100"
+                  className="flex items-center gap-1 sm:gap-2 rounded-lg px-2 sm:px-3 py-2 hover:bg-gray-100 touch-manipulation"
+                  aria-label="User menu"
                 >
-                  <div className="h-8 w-8 rounded-full bg-legal-gold flex items-center justify-center text-legal-navy font-semibold">
+                  <div className="h-8 w-8 rounded-full bg-legal-gold flex items-center justify-center text-legal-navy font-semibold text-sm">
                     {user?.name?.charAt(0) || 'U'}
                   </div>
                   <div className="hidden sm:block text-left">
                     <p className="text-sm font-medium text-legal-charcoal">{user?.name}</p>
                     <p className="text-xs text-gray-500 capitalize">{user?.role}</p>
                   </div>
-                  <ChevronDown className="h-4 w-4 text-gray-600" />
+                  <ChevronDown className="hidden sm:block h-4 w-4 text-gray-600" />
                 </button>
 
                 {/* Dropdown Menu */}
                 {dropdownOpen && (
-                  <div className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 bg-white shadow-lg">
+                  <div className="absolute right-0 mt-2 w-48 rounded-lg border border-gray-200 bg-white shadow-lg z-50">
                     <Link href="/profile" className="block px-4 py-2 hover:bg-gray-50 text-sm text-legal-charcoal border-b border-gray-200">
                       <div className="flex items-center gap-2">
                         <User className="h-4 w-4" />
@@ -165,7 +176,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
         </header>
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto p-6">
+        <main className="flex-1 overflow-auto p-4 sm:p-6">
           {children}
         </main>
       </div>

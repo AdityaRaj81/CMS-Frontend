@@ -15,13 +15,13 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       {/* Welcome Header */}
-      <div className="mb-8">
-        <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Welcome to Legal CMS</h1>
-        <p className="text-gray-600">Manage your cases, documents, and hearings efficiently</p>
+      <div className="mb-6 sm:mb-8">
+        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">Welcome to Legal CMS</h1>
+        <p className="text-sm sm:text-base text-gray-600">Manage your cases, documents, and hearings efficiently</p>
       </div>
 
       {/* Stats Row */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         <StatsCard label="Active Cases" value="12" icon={<FileText className="h-6 w-6" />} color="text-legal-navy" />
         <StatsCard label="Upcoming Hearings" value="5" icon={<Calendar className="h-6 w-6" />} color="text-legal-gold" />
         <StatsCard label="Clients" value="18" icon={<Users className="h-6 w-6" />} color="text-blue-600" />
@@ -29,29 +29,29 @@ export default function Dashboard() {
       </div>
 
       {/* Bento Grid Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 auto-rows-max">
-        {/* Next Hearing - Featured Card (2 columns) */}
-        <div className="lg:col-span-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 auto-rows-max">
+        {/* Next Hearing - Featured Card (2 columns on md+) */}
+        <div className="md:col-span-2">
           <NextHearingCard />
         </div>
 
-        {/* Quick Actions - Featured Card (2 columns) */}
-        <div className="lg:col-span-2">
+        {/* Quick Actions - Featured Card (2 columns on md+) */}
+        <div className="md:col-span-2">
           <QuickActionsCard />
         </div>
 
-        {/* Active Cases - 2 columns */}
-        <div className="lg:col-span-2">
+        {/* Active Cases - 2 columns on md+ */}
+        <div className="md:col-span-2">
           <MyActiveCasesCard />
         </div>
 
-        {/* Court Orders - 2 columns */}
-        <div className="lg:col-span-2">
+        {/* Court Orders - 2 columns on md+ */}
+        <div className="md:col-span-2">
           <RecentCourtOrdersCard />
         </div>
 
         {/* Alerts - Full width */}
-        <div className="lg:col-span-4">
+        <div className="md:col-span-2 lg:col-span-4">
           <AlertsNotificationsCard />
         </div>
       </div>

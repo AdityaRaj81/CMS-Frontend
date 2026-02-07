@@ -39,11 +39,11 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-6 max-w-2xl">
+    <div className="space-y-4 sm:space-y-6 max-w-2xl">
       {/* Header */}
       <div>
-        <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Profile Settings</h1>
-        <p className="text-gray-600">Manage your account and preferences</p>
+        <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">Profile Settings</h1>
+        <p className="text-sm sm:text-base text-gray-600">Manage your account and preferences</p>
       </div>
 
       {saved && (
@@ -52,11 +52,11 @@ export default function ProfilePage() {
 
       {/* Profile Card */}
       <Card>
-        <div className="mb-6 flex items-center gap-4 border-b border-gray-200 pb-6">
-          <div className="h-16 w-16 rounded-full bg-legal-gold flex items-center justify-center text-legal-navy font-bold text-2xl">
+        <div className="mb-6 flex flex-col sm:flex-row items-center sm:items-start gap-4 border-b border-gray-200 pb-6">
+          <div className="h-16 w-16 rounded-full bg-legal-gold flex items-center justify-center text-legal-navy font-bold text-2xl flex-shrink-0">
             {formData.name.charAt(0)}
           </div>
-          <div>
+          <div className="text-center sm:text-left">
             <h2 className="font-serif text-xl font-semibold text-legal-navy">{formData.name}</h2>
             <p className="text-sm text-gray-500 capitalize">{formData.barNumber}</p>
           </div>
@@ -113,15 +113,15 @@ export default function ProfilePage() {
           />
         </div>
 
-        <div className="flex justify-end gap-2 mt-6 pt-6 border-t border-gray-200">
-          <Button variant="secondary" size="sm">
+        <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6 pt-6 border-t border-gray-200">
+          <Button variant="secondary" size="sm" className="touch-manipulation">
             Cancel
           </Button>
           <Button
             variant="primary"
             size="sm"
             onClick={handleSaveProfile}
-            className="gap-2"
+            className="gap-2 touch-manipulation"
           >
             <Save className="h-4 w-4" />
             Save Profile
@@ -148,7 +148,8 @@ export default function ProfilePage() {
               />
               <button
                 onClick={() => setShowPasswords((prev) => ({ ...prev, current: !prev.current }))}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 touch-manipulation p-1"
+                aria-label="Toggle password visibility"
               >
                 {showPasswords.current ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -167,7 +168,8 @@ export default function ProfilePage() {
               />
               <button
                 onClick={() => setShowPasswords((prev) => ({ ...prev, new: !prev.new }))}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 touch-manipulation p-1"
+                aria-label="Toggle password visibility"
               >
                 {showPasswords.new ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>
@@ -186,7 +188,8 @@ export default function ProfilePage() {
               />
               <button
                 onClick={() => setShowPasswords((prev) => ({ ...prev, confirm: !prev.confirm }))}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 touch-manipulation p-1"
+                aria-label="Toggle password visibility"
               >
                 {showPasswords.confirm ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
               </button>

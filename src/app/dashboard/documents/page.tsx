@@ -108,22 +108,23 @@ export default function DocumentsPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Documents</h1>
-          <p className="text-gray-600">Global document management and in-app PDF viewer</p>
+          <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">Documents</h1>
+          <p className="text-sm sm:text-base text-gray-600">Global document management and in-app PDF viewer</p>
         </div>
-        <Button variant="primary" size="md" className="gap-2">
+        <Button variant="primary" size="md" className="gap-2 w-full sm:w-auto touch-manipulation">
           <Upload className="h-5 w-5" />
-          Upload Document
+          <span className="hidden sm:inline">Upload Document</span>
+          <span className="sm:hidden">Upload</span>
         </Button>
       </div>
 
       {/* Filters */}
       <Card className="border-2 border-legal-gold/20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           <Input
             placeholder="Search by title, case number, or description..."
             icon={<Search className="h-5 w-5" />}
@@ -154,11 +155,60 @@ export default function DocumentsPage() {
       </Card>
 
       {/* Documents Grid/List */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
         {/* Document List */}
         <div className="lg:col-span-2">
           <Card className="overflow-hidden">
-            <div className="overflow-x-auto">
+            {/* Mobile Card View */}
+            <div className="md:hidden space-y-4">
+              {filteredDocuments.map((doc) => {
+                const typeConfig = DOCUMENT_TYPES.find((t) => t.value === doc.type)
+                return (
+                  <div
+                    key={doc.id}
+                    className="border-b border-gray-200 last:border-b-0 p-4 hover:bg-gray-50 transition-colors"
+                  >
+                    <div className="flex items-start justify-between mb-2">
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{doc.title}</p>
+                        <p className="text-xs text-gray-500 mt-1">{doc.description}</p>
+                      </div>
+                      <Badge variant="primary" className="text-xs ml-2 flex-shrink-0">
+                        {typeConfig?.label}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center gap-2 text-xs text-gray-600 mb-3">
+                      <span className="font-mono font-semibold text-legal-navy">{doc.caseNumber}</span>
+                      <span>•</span>
+                      <span>{formatFileSize(doc.fileSize * 1024)}</span>
+                      <span>•</span>
+                      <span>{format(doc.uploadedDate, 'dd MMM yyyy')}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={() => {
+                          setSelectedDoc(doc)
+                          setShowViewer(true)
+                        }}
+                        className="flex-1 py-2 px-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 text-sm font-medium transition-colors touch-manipulation flex items-center justify-center gap-2"
+                      >
+                        <Eye className="h-4 w-4" />
+                        View
+                      </button>
+                      <button className="py-2 px-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-gray-700 transition-colors touch-manipulation">
+                        <Download className="h-4 w-4" />
+                      </button>
+                      <button className="py-2 px-3 bg-red-50 hover:bg-red-100 rounded-lg text-legal-red transition-colors touch-manipulation">
+                        <Trash2 className="h-4 w-4" />
+                      </button>
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-gray-200 bg-gray-50">
@@ -217,14 +267,14 @@ export default function DocumentsPage() {
                                 setSelectedDoc(doc)
                                 setShowViewer(true)
                               }}
-                              className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors"
+                              className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation"
                             >
                               <Eye className="h-4 w-4" />
                             </button>
-                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
+                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation">
                               <Download className="h-4 w-4" />
                             </button>
-                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors">
+                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors touch-manipulation">
                               <Trash2 className="h-4 w-4" />
                             </button>
                           </div>
@@ -239,7 +289,7 @@ export default function DocumentsPage() {
         </div>
 
         {/* Document Viewer Preview */}
-        <div className="lg:col-span-1">
+        <div className="lg:col-span-1 hidden lg:block">
           <Card className="sticky top-6">
             {selectedDoc && showViewer ? (
               <div className="space-y-4">

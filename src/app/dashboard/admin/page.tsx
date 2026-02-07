@@ -99,10 +99,10 @@ export default function AdminPage() {
       id: 'users',
       label: 'User Management',
       content: (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             <h3 className="font-serif text-lg font-semibold text-legal-navy">Users</h3>
-            <Button variant="primary" size="sm" className="gap-2">
+            <Button variant="primary" size="sm" className="gap-2 w-full sm:w-auto touch-manipulation">
               <Plus className="h-4 w-4" />
               Add User
             </Button>
@@ -110,7 +110,7 @@ export default function AdminPage() {
 
           {/* Filters */}
           <Card className="border-2 border-legal-gold/20">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               <Input
                 placeholder="Search by name or email..."
                 icon={<Search className="h-5 w-5" />}
@@ -185,10 +185,10 @@ export default function AdminPage() {
                         </td>
                         <td className="px-6 py-4">
                           <div className="flex items-center gap-2">
-                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
+                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation">
                               <Edit className="h-4 w-4" />
                             </button>
-                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors">
+                            <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors touch-manipulation">
                               <Trash2 className="h-4 w-4" />
                             </button>
                           </div>
@@ -210,7 +210,7 @@ export default function AdminPage() {
         <div className="space-y-6">
           <h3 className="font-serif text-lg font-semibold text-legal-navy">Manage Permissions</h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {USER_ROLES.map((role) => (
               <Card
                 key={role.value}
@@ -250,10 +250,10 @@ export default function AdminPage() {
             </div>
 
             <div className="flex gap-2 mt-6 pt-6 border-t border-gray-200">
-              <Button variant="secondary" size="sm" className="flex-1">
+              <Button variant="secondary" size="sm" className="flex-1 touch-manipulation">
                 Reset to Default
               </Button>
-              <Button variant="primary" size="sm" className="flex-1">
+              <Button variant="primary" size="sm" className="flex-1 touch-manipulation">
                 Save Changes
               </Button>
             </div>
@@ -311,11 +311,11 @@ export default function AdminPage() {
               </div>
             </div>
 
-            <div className="flex justify-end gap-2 mt-6 pt-6 border-t border-gray-200">
-              <Button variant="secondary" size="sm">
+            <div className="flex flex-col sm:flex-row justify-end gap-2 mt-6 pt-6 border-t border-gray-200">
+              <Button variant="secondary" size="sm" className="touch-manipulation">
                 Cancel
               </Button>
-              <Button variant="primary" size="sm">
+              <Button variant="primary" size="sm" className="touch-manipulation">
                 Save Settings
               </Button>
             </div>
@@ -334,7 +334,7 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         <Card>
           <div className="text-sm">
             <p className="text-gray-500 mb-1">Total Users</p>
