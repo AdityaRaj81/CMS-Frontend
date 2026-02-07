@@ -62,11 +62,11 @@ export const NOTIFICATION_TYPES = {
 
 export const SIDEBAR_MENU = [
   { id: 'dashboard', label: 'Dashboard', href: '/dashboard', icon: 'LayoutDashboard' },
-  { id: 'cases', label: 'Cases', href: '/cases', icon: 'FileText' },
-  { id: 'documents', label: 'Documents', href: '/documents', icon: 'File' },
-  { id: 'calendar', label: 'Calendar', href: '/calendar', icon: 'Calendar' },
-  { id: 'clients', label: 'Clients', href: '/clients', icon: 'Users' },
-  { id: 'admin', label: 'Admin', href: '/admin', icon: 'Settings', roles: ['admin'] },
+  { id: 'cases', label: 'Cases', href: '/dashboard/cases', icon: 'FileText' },
+  { id: 'documents', label: 'Documents', href: '/dashboard/documents', icon: 'File' },
+  { id: 'calendar', label: 'Calendar', href: '/dashboard/calendar', icon: 'Calendar' },
+  { id: 'clients', label: 'Clients', href: '/dashboard/clients', icon: 'Users' },
+  { id: 'admin', label: 'Admin', href: '/dashboard/admin', icon: 'Settings', roles: ['admin'] },
 ]
 
 export const PAGINATION_LIMIT = 25
