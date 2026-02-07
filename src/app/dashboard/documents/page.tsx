@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Button, Input, Select, Card, Badge } from '@/components/ui'
-import { Upload, Search, Filter, Download, Eye, Trash2 } from 'lucide-react'
+import { Upload, Search, Download, Eye, Trash2, FileText } from 'lucide-react'
 import { format } from 'date-fns'
 import { DOCUMENT_TYPES } from '@/constants'
 

@@ -3,7 +3,7 @@
 import React, { useState } from 'react'
 import { Button, Card, Badge } from '@/components/ui'
 import { ChevronLeft, ChevronRight, Plus, Dot } from 'lucide-react'
-import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth, isSameDay, addMonths, subMonths } from 'date-fns'
+import { format, startOfMonth, endOfMonth, eachDayOfInterval, isSameDay, addMonths, subMonths } from 'date-fns'
 
 interface Hearing {
   id: string
@@ -17,7 +17,7 @@ interface Hearing {
 const mockHearings: Hearing[] = [
   {
     id: '1',
-    date: new Date().setDate(new Date().getDate() + 3),
+    date: new Date(new Date().setDate(new Date().getDate() + 3)),
     time: '10:30 AM',
     caseNumber: 'PIL/2024/156',
     court: 'Patna High Court',
@@ -25,7 +25,7 @@ const mockHearings: Hearing[] = [
   },
   {
     id: '2',
-    date: new Date().setDate(new Date().getDate() + 7),
+    date: new Date(new Date().setDate(new Date().getDate() + 7)),
     time: '2:00 PM',
     caseNumber: 'CS/2024/789',
     court: 'Patna District Court',
@@ -33,7 +33,7 @@ const mockHearings: Hearing[] = [
   },
   {
     id: '3',
-    date: new Date().setDate(new Date().getDate() + 14),
+    date: new Date(new Date().setDate(new Date().getDate() + 14)),
     time: '11:00 AM',
     caseNumber: 'COM/2024/234',
     court: 'Barh Civil Court',
@@ -56,12 +56,6 @@ export default function CalendarPage() {
 
   const getHearingsForDate = (date: Date) => {
     return mockHearings.filter((h) => isSameDay(new Date(h.date), date))
-  }
-
-  const typeColors = {
-    regular: 'bg-blue-100 text-blue-700',
-    'ad-hoc': 'bg-yellow-100 text-yellow-700',
-    urgent: 'bg-legal-red/10 text-legal-red',
   }
 
   return (

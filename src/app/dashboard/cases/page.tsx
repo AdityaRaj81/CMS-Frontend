@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Button, Input, Select, Card, Badge } from '@/components/ui'
-import { Search, Filter, Plus, Eye, Edit, Trash2 } from 'lucide-react'
+import { Search, Plus, Eye, Edit, Trash2 } from 'lucide-react'
 import { format } from 'date-fns'
 import { CASE_CATEGORIES, COURT_LIST, CASE_STATUSES } from '@/constants'
 

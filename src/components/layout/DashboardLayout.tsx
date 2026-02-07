@@ -17,10 +17,8 @@ import {
   Bell,
   ChevronDown,
 } from 'lucide-react'
-import { Button } from './ui'
 import { SIDEBAR_MENU } from '@/constants'
 import { useAuthStore } from '@/store/auth'
-import { UserRole } from '@/types'
 import { cn } from '@/lib/utils'
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {

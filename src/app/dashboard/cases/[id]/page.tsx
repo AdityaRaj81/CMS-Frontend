@@ -2,8 +2,8 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Button, Card, CardHeader, CardTitle, CardContent, Badge, Tabs, Input, TextArea } from '@/components/ui'
-import { ArrowLeft, Copy, Download, MessageSquare, Activity, Clock, FileText, Download as DownloadIcon } from 'lucide-react'
+import { Button, Card, Badge, Tabs, TextArea } from '@/components/ui'
+import { ArrowLeft, Copy, Activity, Clock, FileText, Download as DownloadIcon } from 'lucide-react'
 import { format } from 'date-fns'
 
 export default function CaseDetailPage({ params }: { params: { id: string } }) {
@@ -150,11 +150,11 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
                   </div>
                 </div>
                 <div className="flex items-center gap-2">
-                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
-                    <FileText className="h-4 w-4" title="View" />
+                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="View">
+                    <FileText className="h-4 w-4" />
                   </button>
-                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
-                    <DownloadIcon className="h-4 w-4" title="Download" />
+                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="Download">
+                    <DownloadIcon className="h-4 w-4" />
                   </button>
                 </div>
               </div>
