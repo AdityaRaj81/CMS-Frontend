@@ -35,21 +35,21 @@ export const LoginPage: React.FC = () => {
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-legal-navy to-legal-navy/80 px-4">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-legal-navy to-legal-navy/80 px-4 sm:px-6 py-8">
       <div className="w-full max-w-md">
         {/* Logo Section */}
-        <div className="mb-8 text-center">
-          <h1 className="font-serif text-4xl font-bold text-legal-ivory mb-2">Legal CMS</h1>
-          <p className="text-legal-gold font-medium">Professional Case Management System</p>
+        <div className="mb-6 sm:mb-8 text-center">
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-legal-ivory mb-2">Legal CMS</h1>
+          <p className="text-legal-gold font-medium text-sm sm:text-base">Professional Case Management System</p>
         </div>
 
         {/* Login Card */}
-        <div className="rounded-xl bg-white p-8 shadow-xl">
-          <h2 className="mb-6 font-serif text-2xl font-semibold text-legal-navy">Secure Login</h2>
+        <div className="rounded-xl bg-white p-6 sm:p-8 shadow-xl">
+          <h2 className="mb-6 font-serif text-xl sm:text-2xl font-semibold text-legal-navy">Secure Login</h2>
 
           {error && <Alert type="error" message={error} onClose={() => setError('')} />}
 
-          <form onSubmit={handleLogin} className="space-y-6">
+          <form onSubmit={handleLogin} className="space-y-5 sm:space-y-6">
             <Input
               label="Email Address"
               type="email"
@@ -70,17 +70,17 @@ export const LoginPage: React.FC = () => {
               required
             />
 
-            <div className="flex items-center justify-between text-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 sm:gap-0 text-sm">
               <label className="flex items-center gap-2">
-                <input type="checkbox" className="rounded" />
+                <input type="checkbox" className="rounded touch-manipulation" />
                 <span className="text-gray-600">Remember me</span>
               </label>
-              <Link href="#" className="text-legal-gold hover:underline">
+              <Link href="#" className="text-legal-gold hover:underline touch-manipulation">
                 Forgot password?
               </Link>
             </div>
 
-            <Button type="submit" variant="primary" size="lg" loading={loading} className="w-full">
+            <Button type="submit" variant="primary" size="lg" loading={loading} className="w-full touch-manipulation">
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>

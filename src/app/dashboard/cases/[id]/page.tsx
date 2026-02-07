@@ -49,8 +49,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'overview',
       label: 'Overview',
       content: (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="space-y-4 sm:space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
             <div>
               <h4 className="text-sm font-semibold text-gray-600 mb-2">Case Summary</h4>
               <p className="text-sm text-gray-700 leading-relaxed">{caseData.description}</p>
@@ -70,7 +70,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             <Card>
               <div className="text-sm">
                 <p className="text-gray-500 mb-1">Judge</p>
@@ -97,8 +97,8 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'court-status',
       label: 'Court Status',
       content: (
-        <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4">
             {courtDates.map((item, idx) => (
               <Card key={idx} className="border-l-4 border-legal-gold">
                 <div className="flex items-start gap-4">
@@ -129,31 +129,32 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'documents',
       label: 'Documents',
       content: (
-        <div className="space-y-4">
-          <div className="flex justify-end mb-4">
-            <Button variant="secondary" size="sm" className="gap-2">
+        <div className="space-y-3 sm:space-y-4">
+          <div className="flex flex-col sm:flex-row sm:justify-end mb-3 sm:mb-4 gap-2">
+            <Button variant="secondary" size="sm" className="w-full sm:w-auto touch-manipulation gap-2">
               <DownloadIcon className="h-4 w-4" />
-              Download All
+              <span className="hidden sm:inline">Download All</span>
+              <span className="sm:hidden">Download</span>
             </Button>
           </div>
 
           <div className="space-y-2">
             {documents.map((doc) => (
-              <div key={doc.id} className="flex items-center justify-between border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors">
-                <div className="flex items-center gap-4">
-                  <FileText className="h-5 w-5 text-legal-gold" />
-                  <div>
-                    <p className="font-medium text-gray-900">{doc.name}</p>
+              <div key={doc.id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between border border-gray-200 rounded-lg p-4 hover:bg-gray-50 transition-colors gap-3">
+                <div className="flex items-center gap-3 sm:gap-4 flex-1 min-w-0">
+                  <FileText className="h-5 w-5 text-legal-gold flex-shrink-0" />
+                  <div className="flex-1 min-w-0">
+                    <p className="font-medium text-gray-900 truncate">{doc.name}</p>
                     <p className="text-xs text-gray-500 mt-1">
                       {doc.size} • {format(doc.uploadedDate, 'dd MMM yyyy')}
                     </p>
                   </div>
                 </div>
-                <div className="flex items-center gap-2">
-                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="View">
+                <div className="flex items-center gap-2 justify-end sm:justify-start">
+                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation" title="View">
                     <FileText className="h-4 w-4" />
                   </button>
-                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="Download">
+                  <button className="p-2 hover:bg-gray-200 rounded-lg text-gray-600 hover:text-legal-navy transition-colors touch-manipulation" title="Download">
                     <DownloadIcon className="h-4 w-4" />
                   </button>
                 </div>
@@ -167,7 +168,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'notes',
       label: 'Notes',
       content: (
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           <TextArea
             label="Add Case Notes"
             placeholder="Write important notes, observations, or case details here..."
@@ -175,11 +176,11 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
             onChange={(e) => setNotes(e.target.value)}
             rows={5}
           />
-          <div className="flex justify-end gap-2">
-            <Button variant="secondary" size="sm">
+          <div className="flex flex-col-reverse sm:flex-row justify-end gap-2">
+            <Button variant="secondary" size="sm" className="touch-manipulation">
               Cancel
             </Button>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" className="touch-manipulation">
               Save Notes
             </Button>
           </div>
@@ -222,36 +223,37 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
   ]
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header */}
       <div>
-        <Link href="/dashboard/cases" className="flex items-center gap-2 text-legal-navy hover:text-legal-gold transition-colors mb-4">
+        <Link href="/dashboard/cases" className="flex items-center gap-2 text-legal-navy hover:text-legal-gold transition-colors mb-4 text-sm sm:text-base">
           <ArrowLeft className="h-4 w-4" />
           <span>Back to Cases</span>
         </Link>
 
-        <div className="flex items-start justify-between gap-4">
-          <div>
-            <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">{caseData.title}</h1>
-            <div className="flex items-center gap-4">
-              <span className="font-mono text-sm font-semibold text-gray-600">{caseData.caseNumber}</span>
-              <Copy className="h-4 w-4 text-gray-400 cursor-pointer hover:text-gray-600" />
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
+          <div className="flex-1">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-legal-navy mb-2">{caseData.title}</h1>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              <span className="font-mono text-xs sm:text-sm font-semibold text-gray-600">{caseData.caseNumber}</span>
+              <Copy className="h-4 w-4 text-gray-400 cursor-pointer hover:text-gray-600 touch-manipulation" />
               <Badge variant="success">Active</Badge>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button variant="secondary" size="sm">
+          <div className="flex gap-2 w-full sm:w-auto">
+            <Button variant="secondary" size="sm" className="flex-1 sm:flex-none touch-manipulation">
               Edit
             </Button>
-            <Button variant="primary" size="sm">
-              Schedule Hearing
+            <Button variant="primary" size="sm" className="flex-1 sm:flex-none touch-manipulation">
+              <span className="hidden sm:inline">Schedule Hearing</span>
+              <span className="sm:hidden">Schedule</span>
             </Button>
           </div>
         </div>
       </div>
 
       {/* Case Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
         <Card>
           <div className="text-sm">
             <p className="text-gray-500 mb-1">CNR Number</p>
