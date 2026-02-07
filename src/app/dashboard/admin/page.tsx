@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import { Button, Input, Select, Card, Badge, Tabs } from '@/components/ui'
-import { Search, Plus, Edit, Trash2, Shield, Users, Eye, EyeOff } from 'lucide-react'
+import { Search, Plus, Edit, Trash2, Shield } from 'lucide-react'
 import { USER_ROLES } from '@/constants'
 
 interface User {
@@ -68,11 +68,9 @@ const permissions: Permission[] = [
 ]
 
 export default function AdminPage() {
-  const [activeTab, setActiveTab] = useState('users')
   const [searchTerm, setSearchTerm] = useState('')
   const [filterRole, setFilterRole] = useState('')
   const [filteredUsers, setFilteredUsers] = useState(mockUsers)
-  const [visiblePasswords, setVisiblePasswords] = useState<Set<string>>(new Set())
 
   const handleFilter = () => {
     let filtered = mockUsers
