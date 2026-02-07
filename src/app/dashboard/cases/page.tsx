@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 import { Button, Input, Select, Card, Badge } from '@/components/ui'
 import { Search, Plus, Eye, Edit, Trash2 } from 'lucide-react'
 import { format } from 'date-fns'
@@ -212,13 +213,17 @@ export default function CasesPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-2">
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
-                          <Eye className="h-4 w-4" />
-                        </button>
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors">
-                          <Edit className="h-4 w-4" />
-                        </button>
-                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors">
+                        <Link href={`/dashboard/cases/${caseItem.id}`}>
+                          <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="View case details">
+                            <Eye className="h-4 w-4" />
+                          </button>
+                        </Link>
+                        <Link href={`/dashboard/cases/${caseItem.id}?edit=true`}>
+                          <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-navy transition-colors" title="Edit case">
+                            <Edit className="h-4 w-4" />
+                          </button>
+                        </Link>
+                        <button className="p-2 hover:bg-gray-100 rounded-lg text-gray-600 hover:text-legal-red transition-colors" title="Delete case">
                           <Trash2 className="h-4 w-4" />
                         </button>
                       </div>

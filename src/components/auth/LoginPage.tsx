@@ -2,10 +2,14 @@
 
 import React from 'react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { Button, Input, Alert } from '@/components/ui'
 import { Lock, Mail } from 'lucide-react'
+import { useAuthStore } from '@/store/auth'
 
 export const LoginPage: React.FC = () => {
+  const router = useRouter()
+  const { login } = useAuthStore()
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [loading, setLoading] = React.useState(false)
@@ -22,8 +26,17 @@ export const LoginPage: React.FC = () => {
 
       // Mock successful login - in production, validate credentials
       if (email && password) {
+        // Set mock user based on email
+        const mockUser = {
+          id: '1',
+          name: email.includes('admin') ? 'Admin User' : 'John Advocate',
+          email: email,
+          role: email.includes('admin') ? 'admin' : 'advocate',
+        }
+        
+        login(mockUser as any)
         localStorage.setItem('auth_token', 'mock_token')
-        window.location.href = '/dashboard'
+        router.push('/dashboard')
       } else {
         setError('Please enter valid credentials')
       }

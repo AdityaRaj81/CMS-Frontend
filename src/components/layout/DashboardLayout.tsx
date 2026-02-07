@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import {
   LayoutDashboard,
   FileText,
@@ -23,9 +23,15 @@ import { cn } from '@/lib/utils'
 
 export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const pathname = usePathname()
+  const router = useRouter()
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [dropdownOpen, setDropdownOpen] = useState(false)
   const { user, logout } = useAuthStore()
+
+  const handleLogout = () => {
+    logout()
+    router.push('/login')
+  }
 
   const iconMap: Record<string, React.ReactNode> = {
     LayoutDashboard: <LayoutDashboard className="h-5 w-5" />,
@@ -89,7 +95,10 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
 
         {/* Sidebar Footer */}
         <div className="absolute bottom-0 left-0 right-0 border-t border-gray-200 p-4">
-          <button className="w-full flex items-center gap-2 rounded-lg px-4 py-2 text-gray-600 hover:bg-legal-navy/5 text-left">
+          <button 
+            onClick={handleLogout}
+            className="w-full flex items-center gap-2 rounded-lg px-4 py-2 text-gray-600 hover:bg-legal-navy/5 text-left"
+          >
             <LogOut className="h-5 w-5" />
             <span>Logout</span>
           </button>
@@ -147,7 +156,7 @@ export const DashboardLayout: React.FC<{ children: React.ReactNode }> = ({ child
                     </Link>
                     <button
                       onClick={() => {
-                        logout()
+                        handleLogout()
                         setDropdownOpen(false)
                       }}
                       className="w-full text-left px-4 py-2 hover:bg-gray-50 text-sm text-legal-charcoal"
