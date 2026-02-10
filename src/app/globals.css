@@ -28,21 +28,21 @@
   }
 
   h1 {
-    @apply font-serif text-3xl font-bold text-legal-navy;
+    @apply font-serif text-xl sm:text-2xl md:text-3xl font-bold text-legal-navy;
   }
 
   h2 {
-    @apply font-serif text-2xl font-semibold text-legal-navy;
+    @apply font-serif text-lg sm:text-xl md:text-2xl font-semibold text-legal-navy;
   }
 
   h3 {
-    @apply font-serif text-xl font-semibold text-legal-navy;
+    @apply font-serif text-base sm:text-lg md:text-xl font-semibold text-legal-navy;
   }
 
   h4,
   h5,
   h6 {
-    @apply font-serif font-semibold text-legal-navy;
+    @apply font-serif text-sm sm:text-base font-semibold text-legal-navy;
   }
 
   button {
@@ -114,5 +114,30 @@
 
   .sidebar-link.active {
     @apply border-r-4 border-legal-gold bg-legal-navy/10 text-legal-navy;
+  }
+
+  /* Mobile Responsive Utilities */
+  .mobile-table-container {
+    @apply overflow-x-auto -mx-3 md:mx-0;
+  }
+
+  .mobile-scroll-x {
+    @apply overflow-x-auto;
+  }
+
+  .mobile-scroll-x::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .mobile-scroll-x::-webkit-scrollbar-track {
+    @apply bg-gray-100;
+  }
+
+  .mobile-scroll-x::-webkit-scrollbar-thumb {
+    @apply bg-gray-300 rounded-full;
+  }
+
+  .mobile-scroll-x::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-400;
   }
 }

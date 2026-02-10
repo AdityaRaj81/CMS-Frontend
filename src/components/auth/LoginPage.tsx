@@ -4,12 +4,15 @@ import React from 'react'
 import Link from 'next/link'
 import { Button, Input, Alert } from '@/components/ui'
 import { Lock, Mail } from 'lucide-react'
+import { authService } from '@/services/api'
+import { useAuthStore } from '@/store/auth'
 
 export const LoginPage: React.FC = () => {
   const [email, setEmail] = React.useState('')
   const [password, setPassword] = React.useState('')
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState('')
+  const { login: storeLogin } = useAuthStore()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -17,18 +20,30 @@ export const LoginPage: React.FC = () => {
     setError('')
 
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000))
+      const response = await authService.login(email, password)
+      const data = response.data
 
-      // Mock successful login - in production, validate credentials
-      if (email && password) {
-        localStorage.setItem('auth_token', 'mock_token')
-        window.location.href = '/dashboard'
+      // Store JWT token
+      localStorage.setItem('auth_token', data.jwtToken)
+      document.cookie = `auth_token=${data.jwtToken}; path=/; max-age=86400; SameSite=Strict`
+
+      // Store user info in store
+      storeLogin({
+        id: data.userId,
+        name: data.fullName,
+        email: data.email,
+        role: data.role as any,
+      })
+
+      // Redirect to dashboard
+      window.location.href = '/dashboard'
+    } catch (err: any) {
+      console.error('Login error:', err)
+      if (err.response?.status === 401) {
+        setError('Invalid email or password')
       } else {
-        setError('Please enter valid credentials')
+        setError(err.response?.data?.message || 'Login failed. Please try again.')
       }
-    } catch (err) {
-      setError('Login failed. Please try again.')
     } finally {
       setLoading(false)
     }
@@ -84,14 +99,6 @@ export const LoginPage: React.FC = () => {
               {loading ? 'Logging in...' : 'Login'}
             </Button>
           </form>
-
-          <div className="mt-6 border-t border-gray-200 pt-6">
-            <p className="text-center text-sm text-gray-600">
-              Demo credentials:
-              <br />
-              <span className="font-mono text-xs mt-2 block">admin@cms.com / password123</span>
-            </p>
-          </div>
         </div>
 
         {/* Footer */}

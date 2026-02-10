@@ -99,12 +99,12 @@ export default function AdminPage() {
       id: 'users',
       label: 'User Management',
       content: (
-        <div className="space-y-6">
-          <div className="flex items-center justify-between">
-            <h3 className="font-serif text-lg font-semibold text-legal-navy">Users</h3>
-            <Button variant="primary" size="sm" className="gap-2">
+        <div className="space-y-4 md:space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <h3 className="font-serif text-base md:text-lg font-semibold text-legal-navy">Users</h3>
+            <Button variant="primary" size="sm" className="gap-2 w-full sm:w-auto">
               <Plus className="h-4 w-4" />
-              Add User
+              <span className="text-sm">Add User</span>
             </Button>
           </div>
 
@@ -125,12 +125,12 @@ export default function AdminPage() {
             </div>
           </Card>
 
-          {/* Users Table */}
+          {/* Users Table - Mobile Responsive */}
           <Card className="overflow-hidden">
-            <div className="overflow-x-auto">
-              <table className="w-full">
+            <div className="mobile-scroll-x">
+              <table className="w-full min-w-[640px]">
                 <thead>
-                  <tr className="border-b border-gray-200 bg-gray-50">
+                  <tr className="border-b border-gray-200 bg-gray-50 text-xs md:text-sm">
                     <th className="px-6 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-600">
                       Name
                     </th>
@@ -207,10 +207,10 @@ export default function AdminPage() {
       id: 'permissions',
       label: 'Role Permissions',
       content: (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <h3 className="font-serif text-lg font-semibold text-legal-navy">Manage Permissions</h3>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4 mb-4 md:mb-6">
             {USER_ROLES.map((role) => (
               <Card
                 key={role.value}
@@ -265,7 +265,7 @@ export default function AdminPage() {
       id: 'security',
       label: 'Security',
       content: (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <h3 className="font-serif text-lg font-semibold text-legal-navy">Security Settings</h3>
 
           <Card>
@@ -334,7 +334,7 @@ export default function AdminPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
         <Card>
           <div className="text-sm">
             <p className="text-gray-500 mb-1">Total Users</p>

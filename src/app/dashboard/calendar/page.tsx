@@ -61,14 +61,14 @@ export default function CalendarPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 md:gap-0">
         <div>
-          <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">Calendar</h1>
-          <p className="text-gray-600">Schedule and manage hearing dates</p>
+          <h1 className="font-serif text-2xl md:text-3xl font-bold text-legal-navy mb-1 md:mb-2">Calendar</h1>
+          <p className="text-sm md:text-base text-gray-600">Schedule and manage hearing dates</p>
         </div>
-        <Button variant="primary" size="md" className="gap-2">
+        <Button variant="primary" size="md" className="gap-2 w-full sm:w-auto">
           <Plus className="h-5 w-5" />
-          Schedule Hearing
+          <span className="text-sm md:text-base">Schedule Hearing</span>
         </Button>
       </div>
 
@@ -99,16 +99,25 @@ export default function CalendarPage() {
             </div>
 
             {/* Weekdays */}
-            <div className="grid grid-cols-7 gap-2 mb-4">
-              {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-                <div key={day} className="text-center font-semibold text-gray-600 text-sm py-2">
-                  {day}
+            <div className="grid grid-cols-7 gap-1 md:gap-2 mb-3 md:mb-4">
+              {[
+                { short: 'M', full: 'Mon' },
+                { short: 'T', full: 'Tue' },
+                { short: 'W', full: 'Wed' },
+                { short: 'T', full: 'Thu' },
+                { short: 'F', full: 'Fri' },
+                { short: 'S', full: 'Sat' },
+                { short: 'S', full: 'Sun' },
+              ].map((day, idx) => (
+                <div key={idx} className="text-center font-semibold text-gray-600 text-xs md:text-sm py-2">
+                  <span className="hidden sm:inline">{day.full}</span>
+                  <span className="sm:hidden">{day.short}</span>
                 </div>
               ))}
             </div>
 
             {/* Calendar Days */}
-            <div className="grid grid-cols-7 gap-2">
+            <div className="grid grid-cols-7 gap-1 md:gap-2">
               {/* Previous month days */}
               {Array(daysInMonth[0].getDay())
                 .fill(null)
@@ -126,15 +135,14 @@ export default function CalendarPage() {
                   <button
                     key={date.toISOString()}
                     onClick={() => setSelectedDate(date)}
-                    className={`aspect-square rounded-lg p-2 text-center transition-all duration-200 flex flex-col items-center justify-center ${
-                      isSelected
+                    className={`aspect-square rounded-lg p-2 text-center transition-all duration-200 flex flex-col items-center justify-center ${isSelected
                         ? 'bg-legal-navy text-white'
                         : isToday
-                        ? 'bg-legal-gold/20 text-legal-navy border-2 border-legal-gold'
-                        : dayHearings.length > 0
-                        ? 'bg-blue-50 text-legal-navy border-2 border-blue-200'
-                        : 'hover:bg-gray-50'
-                    }`}
+                          ? 'bg-legal-gold/20 text-legal-navy border-2 border-legal-gold'
+                          : dayHearings.length > 0
+                            ? 'bg-blue-50 text-legal-navy border-2 border-blue-200'
+                            : 'hover:bg-gray-50'
+                      }`}
                   >
                     <span className="text-sm font-semibold">{format(date, 'd')}</span>
                     {dayHearings.length > 0 && (
@@ -151,8 +159,8 @@ export default function CalendarPage() {
           </Card>
         </div>
 
-        {/* Hearings List */}
-        <div>
+        {/* Hearings List - Hidden on mobile in grid, shown separately */}
+        <div className="lg:col-span-1">
           <Card className="sticky top-6">
             <div className="mb-4">
               <h3 className="font-serif text-lg font-semibold text-legal-navy">
@@ -206,8 +214,8 @@ export default function CalendarPage() {
 
       {/* Upcoming Hearings */}
       <Card>
-        <div className="mb-4 border-b border-gray-200 pb-4">
-          <h3 className="font-serif text-xl font-semibold text-legal-navy">All Upcoming Hearings</h3>
+        <div className="mb-3 md:mb-4 border-b border-gray-200 pb-3 md:pb-4">
+          <h3 className="font-serif text-lg md:text-xl font-semibold text-legal-navy">All Upcoming Hearings</h3>
         </div>
         <div className="space-y-3">
           {mockHearings.map((hearing) => (

@@ -49,7 +49,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'overview',
       label: 'Overview',
       content: (
-        <div className="space-y-6">
+        <div className="space-y-4 md:space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h4 className="text-sm font-semibold text-gray-600 mb-2">Case Summary</h4>
@@ -70,7 +70,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
             <Card>
               <div className="text-sm">
                 <p className="text-gray-500 mb-1">Judge</p>
@@ -98,7 +98,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       label: 'Court Status',
       content: (
         <div className="space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
             {courtDates.map((item, idx) => (
               <Card key={idx} className="border-l-4 border-legal-gold">
                 <div className="flex items-start gap-4">
@@ -129,9 +129,9 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       id: 'documents',
       label: 'Documents',
       content: (
-        <div className="space-y-4">
-          <div className="flex justify-end mb-4">
-            <Button variant="secondary" size="sm" className="gap-2">
+        <div className="space-y-3 md:space-y-4">
+          <div className="flex flex-col sm:flex-row justify-end mb-3 md:mb-4">
+            <Button variant="secondary" size="sm" className="gap-2 w-full sm:w-auto">
               <DownloadIcon className="h-4 w-4" />
               Download All
             </Button>
@@ -175,11 +175,11 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
             onChange={(e) => setNotes(e.target.value)}
             rows={5}
           />
-          <div className="flex justify-end gap-2">
-            <Button variant="secondary" size="sm">
+          <div className="flex flex-col sm:flex-row justify-end gap-2">
+            <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
               Cancel
             </Button>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" className="flex-1 sm:flex-none">
               Save Notes
             </Button>
           </div>
@@ -230,20 +230,20 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
           <span>Back to Cases</span>
         </Link>
 
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col md:flex-row items-start md:items-start justify-between gap-4">
           <div>
-            <h1 className="font-serif text-3xl font-bold text-legal-navy mb-2">{caseData.title}</h1>
-            <div className="flex items-center gap-4">
+            <h1 className="font-serif text-2xl md:text-3xl font-bold text-legal-navy mb-2">{caseData.title}</h1>
+            <div className="flex flex-wrap items-center gap-3 md:gap-4">
               <span className="font-mono text-sm font-semibold text-gray-600">{caseData.caseNumber}</span>
               <Copy className="h-4 w-4 text-gray-400 cursor-pointer hover:text-gray-600" />
               <Badge variant="success">Active</Badge>
             </div>
           </div>
-          <div className="flex gap-2">
-            <Button variant="secondary" size="sm">
+          <div className="flex flex-col sm:flex-row gap-2 w-full md:w-auto">
+            <Button variant="secondary" size="sm" className="flex-1 sm:flex-none">
               Edit
             </Button>
-            <Button variant="primary" size="sm">
+            <Button variant="primary" size="sm" className="flex-1 sm:flex-none">
               Schedule Hearing
             </Button>
           </div>
@@ -251,7 +251,7 @@ export default function CaseDetailPage({ params }: { params: { id: string } }) {
       </div>
 
       {/* Case Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4">
         <Card>
           <div className="text-sm">
             <p className="text-gray-500 mb-1">CNR Number</p>

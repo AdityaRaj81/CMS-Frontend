@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000/api'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'
 
 const apiClient = axios.create({
   baseURL: API_URL,
@@ -25,6 +25,7 @@ apiClient.interceptors.response.use(
     if (error.response?.status === 401) {
       // Handle unauthorized
       localStorage.removeItem('auth_token')
+      document.cookie = 'auth_token=; path=/; max-age=0; SameSite=Strict'
       window.location.href = '/login'
     }
     return Promise.reject(error)
@@ -37,7 +38,11 @@ export default apiClient
 export const authService = {
   login: (email: string, password: string) =>
     apiClient.post('/auth/login', { email, password }),
-  logout: () => apiClient.post('/auth/logout'),
+  logout: () => {
+    localStorage.removeItem('auth_token')
+    document.cookie = 'auth_token=; path=/; max-age=0; SameSite=Strict'
+    return Promise.resolve()
+  },
   getCurrentUser: () => apiClient.get('/auth/me'),
 }
 
@@ -85,6 +90,7 @@ export const usersService = {
   getById: (id: string) => apiClient.get(`/users/${id}`),
   create: (data: any) => apiClient.post('/users', data),
   update: (id: string, data: any) => apiClient.put(`/users/${id}`, data),
+  updateProfile: (data: any) => apiClient.put('/users/me', data),
   delete: (id: string) => apiClient.delete(`/users/${id}`),
   updatePassword: (id: string, data: any) => apiClient.put(`/users/${id}/password`, data),
 }
